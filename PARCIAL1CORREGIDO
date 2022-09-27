@@ -1,0 +1,299 @@
+package upb.bga.edu.co;
+
+public class Principal {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+			/*
+			ESTADO/CIUDAD 	CÓD 	HABITANTES
+			Antioquia: 		05
+			Medellín 		05001 	2549537
+			Bello 			05088 	491159
+			Itagüí 			05360 	279894
+			Envigado 		05266 	243568
+			Apartadó 		05045 	200931
+			
+			Santander: 		68
+			Bucaramanga 	68001 	528352
+			Floridablanca 	68276 	266102
+			Barrancabermeja 68081 	191704
+			Girón 			68307 	185248
+			Piedecuesta 	68547 	152665
+			
+			Cundinamarca: 	25
+			Soacha 			25754 	522442
+			Fusagasugá	 	25290 	137164
+			Facatativá 		25269 	134522
+			Chía 			25175 	129652
+			Zipaquirá 		25899 	124376
+			*/
+			
+			
+			Pais[] paises = new Pais[5];
+
+			Pais colombia = new Pais("Colombia", "57");
+			Estado estado;
+			// Antioquia
+
+			// Antioquia
+
+			estado = new Estado("Antioquia", "05");
+			estado.addCiudad(new Ciudad("Medellín", "05001", 2549537));
+			estado.addCiudad(new Ciudad("Bello", "05088", 491159));
+			estado.addCiudad(new Ciudad("Itagüí", "05360", 279894));
+			estado.addCiudad(new Ciudad("Envigado", "05266", 243568));
+			estado.addCiudad(new Ciudad("Apartadó", "05045", 200931));
+			colombia.addEstado(estado);
+			
+			// Santander
+
+			estado = new Estado("Santander", "68");
+			estado.addCiudad(new Ciudad("Bucaramanga", "68001", 528352));
+			estado.addCiudad(new Ciudad("Floridablanca", "68276", 266102));
+			estado.addCiudad(new Ciudad("Barrancabermeja", "68081", 191704));
+			estado.addCiudad(new Ciudad("Girón", "68307", 185248));
+			estado.addCiudad(new Ciudad("Piedecuesta", "68547", 152665));
+			colombia.addEstado(estado);
+			
+			// Cundinamarca
+
+			estado = new Estado("Cundinamarca", "25");
+
+			estado.addCiudad(new Ciudad("Soacha", "25754", 522442));
+			estado.addCiudad(new Ciudad("Fusagasugá", "25290", 137164));
+			estado.addCiudad(new Ciudad("Facatativá", "25269", 134522));
+			estado.addCiudad(new Ciudad("Chía", "25175", 129652));
+			estado.addCiudad(new Ciudad("Zipaquirá", "25899", 124376));
+
+			colombia.addEstado(estado);
+					
+			System.out.println("Habitantes en el país " + colombia.getPais() + ": " +colombia.getHabitantes());
+
+			System.out.println();
+			Estado resEstado = colombia.buscarEstado("Santander");
+
+			if (resEstado != null) {
+				System.out.println("Estado encontrado: " + resEstado.getEstado() +", código " + resEstado.getCodEstado() +", lista ciudades:");
+				String[] listaCiudades = resEstado.getListaCiudades();
+						for (String nombreCiudad : listaCiudades) {
+							System.out.println("- " + nombreCiudad);
+						}
+				}
+			System.out.println();
+
+			Ciudad resCiudad = colombia.buscarCiudad("Envigado");
+			if (resCiudad != null) {
+				System.out.println("Ciudad encontrada: " + resCiudad.getCiudad() +", código " + resCiudad.getCodCiudad());
+
+				}//Cerrar if null
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+package upb.bga.edu.co;
+
+public class Ciudad {
+	protected String nombreCiudad = "";
+	protected String codCiudad = "";
+	public int habitantes;
+	
+	public Ciudad(String nombreCiudad, String codCiudad, int habiantes) {
+		this.nombreCiudad = nombreCiudad;
+		this.codCiudad = codCiudad;
+		this.habitantes = habiantes;
+	}
+	
+	public String getCiudad(){
+		
+		return nombreCiudad;
+	}
+	public String getCodCiudad() {
+		return codCiudad;
+	}
+
+	public int getHabitantes() {
+		return habitantes;
+	}
+
+	public void setHabitantes(int habitantes) {
+		this.habitantes = habitantes;
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+package upb.bga.edu.co;
+
+public class Estado {
+	private String estado;
+	private String codEstado = "";
+	private Ciudad[] arrCiudades = new Ciudad[10];
+	private int nContadorCiudades;
+	
+	public Estado(String estado, String codEstado) {
+		this.estado = estado;
+		this.codEstado = codEstado;
+	}
+	
+	public void addCiudad(Ciudad objCiudad) {
+		arrCiudades[nContadorCiudades] = objCiudad;
+		nContadorCiudades++;
+	}//addCiudad
+	
+	/*
+	public String getListaCiudades() {
+		String sListaCiudades = "";
+		for (int ii = 0; ii < arrCiudades.length; ii++) {
+			if(arrCiudades[ii] == null) {
+				continue;
+			}
+			sListaCiudades += arrCiudades[ii].getCiudad() + " ";
+		}//for arrCiudades
+		return sListaCiudades;
+		
+	}
+	*/
+	public String[] getListaCiudades() {
+		String[] listaCiudades = new String[nContadorCiudades];
+		for (int ii = 0; ii < nContadorCiudades; ii++) {
+			listaCiudades[ii] = arrCiudades[ii].getCiudad();
+		}
+		return listaCiudades;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCodEstado() {
+		return codEstado;
+	}
+
+	public void setCodEstado(String codEstado) {
+		this.codEstado = codEstado;
+	}
+
+	public int getnContadorCiudades() {
+		return nContadorCiudades;
+	}
+	
+	public int getHabitantes() {
+		int Habitantes = 0;
+		for (int ii = 0; ii < nContadorCiudades; ii++) {
+			Habitantes += arrCiudades[ii].getHabitantes();
+		}
+		return Habitantes;
+	}
+	
+	
+	public Ciudad buscarCiudad(String nombreCiudad) {
+		for (int ii = 0; ii < nContadorCiudades; ii++) {
+			Ciudad Ciudad = arrCiudades[ii];
+			if (Ciudad.getCiudad().equals(nombreCiudad)) {
+				return Ciudad;
+			}
+		}
+		return null;
+	} 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+package upb.bga.edu.co;
+
+public class Pais {
+	protected String Pais =" ";
+	protected String CodPais =" ";
+	protected Estado[ ] estados = new Estado[50];
+	protected int Contador = 0;
+
+	public Pais(String Pais, String CodPais){
+		super();
+		this.Pais = Pais;
+		this.CodPais = CodPais;
+	}
+	public String getPais(){
+		return Pais;
+	}
+	public void setPais(String Pais){
+		this.Pais = Pais;
+	}
+	public String getCodPais(){
+		return CodPais;
+	}
+	public void setCodPais(String CodPais){
+		this.CodPais = CodPais;
+	}
+	public Estado[ ] getEstado(){
+		return estados;
+	}
+	public void setEstado(Estado[ ] Estado){
+		this.estados = Estado;
+	}
+	public void addEstado(Estado Estado){
+		this.estados[Contador] = Estado;
+		Contador ++;
+	}
+	public int getHabitantes(){
+		int Habitantes = 0;
+			for(int ii = 0; ii< Contador; ii++){
+		Habitantes += estados[ii].getHabitantes();
+	}
+			return Habitantes;
+	}
+	public Estado buscarEstado(String nombreEstado){
+		for(int ii = 0; ii< Contador; ii++){
+			Estado estado = estados[ii];
+			if (estado.getEstado().equals (nombreEstado)){
+				return estado;
+			}
+	}
+	return null;
+	}
+	public Ciudad buscarCiudad(String nombreCiudad){
+		for(int ii = 0; ii< Contador; ii++){
+			Estado EEstado = estados[ii];
+			Ciudad resultado = EEstado.buscarCiudad(nombreCiudad);
+			if (resultado!= null){
+				return resultado ;
+			}
+		}
+		return null;
+		}
+
+}
