@@ -1,0 +1,121 @@
+# Repositorio-personal
+package MiPaquete;
+
+public class Principal {
+    public static void main(String args[]){
+
+    }//CLASE PRINCIPAL
+}
+
+
+
+
+
+package MiPaquete;
+
+public class Computador {
+
+    public int memoriaGb = 0;
+    public String refCpu = "";
+    public double velocidadGpuGhz;
+    public int nucleosCpu= 0;
+    public int almacenamientoGb=0;
+
+    public Computador(){
+        //CONSTRUCTOR SIN ATRIBUTOS
+    }
+
+    public void setRefCpu(String refCpu) {
+        this.refCpu = refCpu;
+    }
+
+}//CLASE COMPUTADOR
+
+
+
+
+
+
+
+
+package MiPaquete;
+
+public class Portatil extends Computador {
+
+    public int pantallaPg = 0;
+    public boolean pantallaTactil = false;
+    private int capacidadBateria = 0;
+    private boolean camara = false;
+
+    public Portatil(String refCpu, int capacidadBateria){
+        this.pantallaPg = pantallaPg;
+        this.capacidadBateria = capacidadBateria;
+        this.pantallaTactil = pantallaTactil;
+    }
+
+    public void setCamara(boolean camara) {
+        this.camara = camara;
+    }
+
+}//CLASE PORTATIL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package MiPaquete;
+
+public class PcEscritorio extends Computador {
+
+    public boolean monitor = false;
+    public int puertosUsb = 0;
+    private boolean unidadDvd = false;
+    private int puertosSata = 0;
+
+    public PcEscritorio(String refCpu, int puertosSata){
+
+    }
+
+    public void setRefCpu(String refCpu){
+
+    }
+}//CLASE PC ESCRITORIO
+
+
+
+
+
+
+
+
+
+
+package MiPaquete;
+
+import java.util.ArrayList;
+
+public class Sucursal {
+
+    public String nombreSucursal = "";
+    public Portatil[] arrPortatiles;
+    public ArrayList<PcEscritorio> alPcsEscritorio;
+
+    public Sucursal(){
+
+    }
+
+
+
+}//CLASE SUCURSAL
